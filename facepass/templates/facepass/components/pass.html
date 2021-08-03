@@ -1,0 +1,14 @@
+<!-- Entry Component  -->
+<article id="item{{item.id}}">
+    <h3 class="header">{{ item.company.name }}</h3>
+    {% include "facepass/components/badge.html" %}
+    <p class="permissions wrap">
+        requested:
+        <span>{{ item.company.get_requested_information|join:" | " }}</span>
+    </p>
+    <p class="permissions wrap">
+        permissions:
+        <span>{{ item.get_allowed_information|join:" | " }}</span>
+    </p>
+    <p class="timestamp">Last updated on {{ item.updated_on }}</p>
+</article>

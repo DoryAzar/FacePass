@@ -1,0 +1,67 @@
+{% extends "facepass/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ title }}</h2>
+
+    <!-- CSRF -->
+    {% if detector %}
+        {% csrf_token %}
+    {% endif %}
+
+    <!-- BANNER MESSAGES -->
+    {% if not hide_form_messages %}
+        {% include "facepass/components/banner.html" %}
+    {% endif %}
+
+    <!-- PROTECTED INFORMATION -->
+    {% if protected %}
+        {% include "facepass/components/personal_info.html" %}
+    {% endif %}
+
+    <!-- MD CONTENT -->
+    {% if content %}
+        {{ content|safe }}
+        <br>
+    {% endif %}
+
+    <!-- TEST COMPANY -->
+    {% if facepass %}
+        {% include "facepass/components/facepass_button.html" %}
+    {% endif %}
+
+    <!-- DETECTOR -->
+    {% if detector %}
+        {% include "facepass/components/detector.html" %}
+    {% endif %}
+
+    <!-- FORM: if form is sent to the view -->
+    {% if form %}
+        <!-- Legend -->
+        {% if not hide_legend %}
+            <p class="instruction">* denotes required fields</p>
+            <br>
+        {% endif %}
+
+        <!-- Form -->
+        {% include "facepass/components/form_component.html" %}
+    {% endif %}
+
+    <!-- LIST: if list is sent to the view -->
+    {% if display_list %}
+        {% include "facepass/components/passes.html" %}
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    {% if detector %}
+        <script src="{% static 'facepass/face-api.min.js' %}" defer></script>
+        <script src="{% static 'facepass/detect.js' %}" defer></script>
+        <script src="{% static 'facepass/facepass.js' %}" defer></script>
+    {% endif %}
+{% endblock %}

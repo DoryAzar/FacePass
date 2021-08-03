@@ -1,0 +1,14 @@
+#!/bin/bash
+
+args=("$@")
+python manage.py flush
+set +e
+rm -R ./${args[0]}/migrations/__pycache__/
+rm ./${args[0]}/migrations/000*.py
+rm ./db.sqlite3
+
+set -e
+python manage.py makemigrations ${args[0]}
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver

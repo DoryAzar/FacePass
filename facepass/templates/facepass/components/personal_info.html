@@ -1,0 +1,22 @@
+<!-- Personal Info Component  -->
+<br>
+<h3 class="header">Shared Information</h3>
+<hr>
+{% if personal_information %}
+    <p class="content wrap">You accepted to share the following information with us</p>
+{% endif %}
+{% for k, v in personal_information.items %}
+    <p class="information wrap">{{ k }}:{% if v is not None %}{{ v }}{% else %} not specified{% endif %}</p>
+{% empty %}
+    <p class="content wrap">You decided not to share your information with us</p>
+    <br>
+{% endfor %}
+<br>
+<h3 class="header">Powered by FacePass</h3>
+<hr>
+{% if personal_information %}
+    <p class="information wrap">This pass has been added to your FacePass account.
+    Visit your <a href="{% url 'passes' %}">FacePass account</a> to view and modify all your passes
+    </p>
+{% endif %}
+<a href="{% url 'testcompany' %}">Pick another company</a>

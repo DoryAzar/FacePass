@@ -1,0 +1,17 @@
+<!-- Passes template -->
+<p class="content wrap">Companies authorized to face-identify you are listed here</p>
+{% for item in list %}
+    {% include "facepass/components/pass.html" %}
+    <hr>
+{% empty  %}
+<br>
+    <p class="secondary wrap">Currently, you have not provided access to any company</p>
+    <br>
+    <hr>
+    <p class="information wrap semibold">Before you start using FacePass with affiliated companies,</p>
+    <ul>
+        <li><a href="{% url 'onboard'  %}">Set up FaceID</a> in order for FacePass recognizes you</li>
+        <li><a href="{% url 'personal_information'  %}">Complete your personal information</a> 
+            and you will no longer need to provide them to other services ever again</li>
+    </ul>
+{% endfor %}

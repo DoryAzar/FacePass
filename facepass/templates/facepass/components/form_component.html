@@ -1,0 +1,22 @@
+
+<form method="{{ form_method.html_method }}">
+    {% csrf_token %}
+
+    {% if form_method.spoof_method %}
+        <input type="hidden" name="_method" value="{{ form_method.spoof_method}}">
+    {% endif %}
+
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            <br>
+            {{ field }}
+            {{ field.errors }}
+        </div>
+    {% endfor %}
+    <br>
+    {% if form_action %}
+        <input name="form_action" type="hidden" value="{{ form_action }}">
+    {% endif %}
+    <input class="btn btn-dark" type="submit" value="{% if custom_button_label %}{{ custom_button_label }}{% elif is_edit %} Update {% else %} Add {% endif %}">
+</form>
